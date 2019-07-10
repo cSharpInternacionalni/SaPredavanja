@@ -40,3 +40,26 @@ void  funkcija3()
 {
 	Console.WriteLine("Treca funkcija");
 }
+
+naKvad(5);
+naKvad(5, 3);
+void naKvad (int xqw, int stepen = 2)
+{
+	
+}
+
+fja(s:"sd", xbc:5);
+
+void fja(int xbc, string s)
+{
+	
+}
+
+param("asd", 3);
+param("asd", 3, 6, 7, 8, 9);
+
+
+void param(string asd, params int[] p)
+{
+	
+}
