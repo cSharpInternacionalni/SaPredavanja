@@ -9,6 +9,8 @@ ushort su;
 int i; //int32
 uint iu;
 
+const int konstanta = 5;
+
 long l; //int64
 ulong lu;
 
@@ -70,3 +72,12 @@ var artikal = (naziv:"Kafa", cena:4.5, kol:40); //tuple
 Console.WriteLine(artikal.naziv);
 
 (string, int)[] nizT = new (string, int)[5]; //niz tuplova :)
+
+
+
+byte neki2 = 255;
+checked
+{
+	neki2 += 8;
+}
+Console.WriteLine(neki2);

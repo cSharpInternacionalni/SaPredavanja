@@ -18,3 +18,14 @@ while (true)
 }
 
 Console.WriteLine("Zbir je: " + (broj + 5) );
+
+
+broj = 0;
+while (true)
+{
+	Console.WriteLine("Unesite broj: ");
+	
+	if (int.TryParse(Console.ReadLine(), out broj))
+		break;
+}
+Console.WriteLine("Zbir je: " + (broj + 5) );

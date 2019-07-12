@@ -32,10 +32,10 @@ srch.Dump();
 string broj = "3";
 Console.WriteLine("+" + broj.Trim(' ') + "+" );
 
+int broj1 = 5, broj2 = 6;
 
-int.Parse(broj);
-double.Parse(broj);
-
-
-
-
+Console.WriteLine("Prvi broj je " + broj1 + " a drugi broj je " + broj2);
+string fString = String.Format("Prvi broj je {0, 5} a drugi broj je {1, -5}.", broj1, broj2);
+Console.WriteLine(fString);
+Console.WriteLine(String.Format("Prvi broj je {0, 5} a drugi broj je {1, -5}.", broj1, broj2));
+Console.WriteLine($"Prvi broj je {broj1, 5} a drugi broj je {broj2}");
