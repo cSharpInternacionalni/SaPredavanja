@@ -25,11 +25,13 @@ namespace Avantura
             Soba g = new Soba("sedma");
 
             Soba.poveziSobe(a, b, Pravci.istok);
-            Soba.poveziSobe(b, c, Pravci.sever);
+            Soba.poveziSobe(b, c, Pravci.sever, true);
             Soba.poveziSobe(c, d, Pravci.zapad);
             Soba.poveziSobe(c, e, Pravci.istok);
             Soba.poveziSobe(c, f, Pravci.sever);
             Soba.poveziSobe(f, g, Pravci.sever);
+
+            
 
             pc = new Igrac(a);
 
@@ -77,6 +79,8 @@ namespace Avantura
             {
                 if (pc.TrenutnaSoba.prohodno(pravac, out Soba s))
                 {
+                    if (pc.TrenutnaSoba.zakljucana((Pravci)pravac))
+                        return "Zakljucano...";
                     pc.TrenutnaSoba = s;
                     return "Prelazite u drugu sobu...";
                 }

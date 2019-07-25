@@ -11,10 +11,17 @@ namespace Avantura
         //Soba u kojoj se trenutno nalazimo
         internal Soba TrenutnaSoba
         {set; get; }
+        internal bool imaKljuc;
+
 
         public Igrac(Soba s)
         {
             this.TrenutnaSoba = s;
+        }
+
+        public bool otkljucano(Soba s)
+        {
+            return false;
         }
         
     }

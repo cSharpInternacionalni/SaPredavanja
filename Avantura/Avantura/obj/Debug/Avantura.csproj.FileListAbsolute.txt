@@ -1,0 +1,7 @@
+C:\Users\Mithad\source\repos\Avantura\Avantura\bin\Debug\Avantura.exe.config
+C:\Users\Mithad\source\repos\Avantura\Avantura\bin\Debug\Avantura.exe
+C:\Users\Mithad\source\repos\Avantura\Avantura\bin\Debug\Avantura.pdb
+C:\Users\Mithad\source\repos\Avantura\Avantura\obj\Debug\Avantura.csprojAssemblyReference.cache
+C:\Users\Mithad\source\repos\Avantura\Avantura\obj\Debug\Avantura.csproj.CoreCompileInputs.cache
+C:\Users\Mithad\source\repos\Avantura\Avantura\obj\Debug\Avantura.exe
+C:\Users\Mithad\source\repos\Avantura\Avantura\obj\Debug\Avantura.pdb
