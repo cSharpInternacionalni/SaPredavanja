@@ -6,6 +6,13 @@ using System.Threading.Tasks;
 
 namespace Avantura
 {
+    public enum Pravci : byte
+    {
+        sever, 
+        istok,
+        jug,
+        zapad
+    }
     class Soba
     {
         //Opis citamo odakle god iz asemblija,
@@ -34,8 +41,9 @@ namespace Avantura
             this.Opis = s;
         }
 
-        public static void poveziSobe(Soba a, Soba b, int pravac)
+        public static void poveziSobe(Soba a, Soba b, Pravci p)
         {
+            int pravac = (int)p;
             //Kada povezujemo sobu proveravamo da vec nema sobu
             //u tom pravcu, i ako je ima, podesava izlaz iz druge sobe
             //na null, da ne bi slucajno dobili situaciju da imamo
