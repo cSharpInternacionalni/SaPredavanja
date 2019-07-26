@@ -11,8 +11,8 @@ namespace Avantura
         //Soba u kojoj se trenutno nalazimo
         internal Soba TrenutnaSoba
         {set; get; }
-        internal bool imaKljuc;
 
+        internal List<Item> inv = new List<Item>();
 
         public Igrac(Soba s)
         {
@@ -24,5 +24,14 @@ namespace Avantura
             return false;
         }
         
+        public string pokaziInventar()
+        {
+            string s = "\n";
+            foreach (Item i in this.inv)
+            {
+                s += i.ToString() + "\n";
+            }
+            return s;
+        }
     }
 }

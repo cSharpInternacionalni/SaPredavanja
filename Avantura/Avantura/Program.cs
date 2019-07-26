@@ -26,6 +26,7 @@ namespace Avantura
 
             Soba.poveziSobe(a, b, Pravci.istok);
             Soba.poveziSobe(b, c, Pravci.sever, true);
+            b.inv.Add(new Kljuc(b, Pravci.sever));
             Soba.poveziSobe(c, d, Pravci.zapad);
             Soba.poveziSobe(c, e, Pravci.istok);
             Soba.poveziSobe(c, f, Pravci.sever);
@@ -37,7 +38,7 @@ namespace Avantura
 
             do  //Game loop
             {
-                Console.WriteLine(pc.TrenutnaSoba.Opis);
+                Console.WriteLine(pc.TrenutnaSoba.ToString());
                 Console.Write(": ");
 
                 /* Isto kao: 
@@ -88,8 +89,20 @@ namespace Avantura
                     return "Ne mozete u tom pravcu!";
             } else
             {
-                //TODO druge komande
-                return "Nemamo jos nista ovde :( ";
+                if (int.TryParse(unos.KeyChar.ToString(), out int indeks))
+                {
+                    if (pc.TrenutnaSoba.inv.Count < indeks)
+                        return "Nema toga itema";
+                    pc.inv.Add(pc.TrenutnaSoba.inv[indeks - 1]);
+                    pc.TrenutnaSoba.inv.RemoveAt(indeks - 1);
+                    return "Uzeli ste item";
+                }
+                else if (unos.Key.Equals(ConsoleKey.I))
+                {
+                    return pc.pokaziInventar();
+                }
+                else
+                    return $"Nemamo jos nista ovde :(";
             }
 
         }

@@ -20,6 +20,7 @@ namespace Avantura
         //private da se osiguramo da nesto trece
         //nije u stanju da ga zameni 
         internal string Opis { get; private set; }
+        internal List<Item> inv= new List<Item>();
 
         //Svaka soba pamti reference ka 
         //sobama koje su joj susedne
@@ -70,6 +71,23 @@ namespace Avantura
             //znaci 3+2 = 5, ispadamo iz duzine niza,
             //no onda 5%4 = 1, i tacno smo gde treba da budemo
             b.povezaneSobe[(pravac + 2) % 4].soba = a;            
+        }
+
+        public override string ToString()
+        {
+            string s = this.Opis + "\n";
+            if (this.inv.Count > 0)
+            {
+                s += "Itemi: ";
+                int indeks = 1;
+                foreach (Item i in this.inv)
+                {
+                    s += indeks + " " + i.ToString() + " ";
+                    indeks++;
+                }
+            }
+            s += "\n";
+            return s;
         }
     }
 }
