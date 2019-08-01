@@ -1,0 +1,7 @@
+C:\Users\Mithad\source\repos\Plate\Plate\bin\Debug\Plate.exe.config
+C:\Users\Mithad\source\repos\Plate\Plate\bin\Debug\Plate.exe
+C:\Users\Mithad\source\repos\Plate\Plate\bin\Debug\Plate.pdb
+C:\Users\Mithad\source\repos\Plate\Plate\obj\Debug\Plate.csprojAssemblyReference.cache
+C:\Users\Mithad\source\repos\Plate\Plate\obj\Debug\Plate.csproj.CoreCompileInputs.cache
+C:\Users\Mithad\source\repos\Plate\Plate\obj\Debug\Plate.exe
+C:\Users\Mithad\source\repos\Plate\Plate\obj\Debug\Plate.pdb

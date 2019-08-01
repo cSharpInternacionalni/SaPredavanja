@@ -8,7 +8,7 @@ namespace Plate
 {
     class Radnik
     {
-        //TODO titula
+        internal Pozicija radnoMesto { private set; get; }
         internal string Ime { private set; get; }
         internal string Prezime { private set; get; }
         internal string PunoIme
@@ -23,21 +23,17 @@ namespace Plate
 
         //EXP objasni properties i pozadinska polja
         //EXP objasni tagove, kada smo kod toga :D
-        private long id;
-        internal long ID
-        {
-          private set => this.id = Radnik.iduciID++;
-          get => this.id;
-        }
+        internal long ID { private set; get; }
 
         static long iduciID;
 
-        public Radnik(string i, string p)
+        public Radnik(string i, string p, Pozicija poz)
         {
             this.Ime = i;
             this.Prezime = p;
-            //HACK koristimo property, vrednost se zanemaruje ovde
-            this.ID = 0;
+            this.ID = iduciID++;
+            this.radnoMesto = poz;
+            this.radnoMesto.radnici.Add(this);
         }
 
         /*Lambda izraz, ovo je isto kao i
@@ -45,6 +41,20 @@ namespace Plate
          * {
          *      return $"{this.ID} -- {this.PunoIme}";
          * } */
-        public override string ToString() => $"{this.ID} -- {this.PunoIme}";
+        public override string ToString() => $"{this.ID} -- {this.radnoMesto.naziv} -- {this.PunoIme}";
+    }
+
+    class Pozicija
+    {
+        internal string naziv { private set; get; }
+        internal decimal plata { private set; get; }
+        internal List<Radnik> radnici = new List<Radnik>();
+        internal Pozicija(string n, decimal p)
+        {
+            this.naziv = n;
+            this.plata = p;
+        }
+
+        public override string ToString() => $"{this.naziv} -- Plata: {this.plata} -- Broj zaposlenih na radnom mestu: {this.radnici.Count}";
     }
 }
