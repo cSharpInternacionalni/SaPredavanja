@@ -47,7 +47,7 @@ namespace Plate
     class Pozicija
     {
         internal string naziv { private set; get; }
-        internal decimal plata { private set; get; }
+        internal decimal plata { set; get; }
         internal List<Radnik> radnici = new List<Radnik>();
         internal Pozicija(string n, decimal p)
         {

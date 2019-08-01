@@ -10,7 +10,7 @@ namespace Plate
     {
         //TODO ovo ide u firmu!!!
         static HashSet<Pozicija> pozicije = new HashSet<Pozicija>();
-        static List<Radnik> radnici = new List<Radnik>();
+        
         static void Main(string[] args)
         {
             do
@@ -27,6 +27,8 @@ namespace Plate
                 switch(izbor)
                 {
                     case 1:
+                        if (UI.pozicije.Count == 0)
+                            break;
                         Console.WriteLine("Unesite radno mesto, ime i prezime: ");
                         string[] pozicijaImeIprezime = Console.ReadLine().Split(' ');
                         
@@ -47,26 +49,41 @@ namespace Plate
                         Console.WriteLine("Unesite id");
                         if (long.TryParse(Console.ReadLine(), out long id))
                         {
-                            //TODO ovo ce da se menja!!
-                            foreach (Radnik r in radnici)
-                                if (r.ID == id)
-                                {
-                                        radnici.Remove(r);
+                            foreach (Pozicija p in UI.pozicije)
+                            {
+                                bool otpusten = false;  
+                                foreach (Radnik r in p.radnici)
+                                    if (r.ID == id)
+                                    {
+                                        p.radnici.Remove(r);
+                                        otpusten = true;
                                         break;
-                                }
+                                    }
+                                if (otpusten)
+                                    break;
+                            }
                         }
                         break;
                     case 3:
-                        foreach (Radnik r in radnici)
-                            Console.WriteLine(r.ToString());
+                        foreach (Pozicija p in UI.pozicije)
+                            foreach (Radnik r in p.radnici)
+                                Console.WriteLine(r.ToString());
                         break;
                     case 4: //TODO greskaaaa
                         Console.WriteLine("Naziv radnog mesta i plata: ");
                         string[] unos = Console.ReadLine().Split(' ');
                         if (decimal.TryParse(unos[1], out decimal plata))
                         {
-                            //UI.pozicije.Contains()
-                            UI.pozicije.Add(new Pozicija(unos[0], plata));
+                            bool duplikat = false;
+                            foreach (Pozicija p in UI.pozicije)
+                                if (p.naziv.Equals(unos[0]))
+                                {
+                                    duplikat = true;
+                                    p.plata = plata;
+                                    break;
+                                }
+                            if (!duplikat)
+                                UI.pozicije.Add(new Pozicija(unos[0], plata));
                         }
                         break;
                     case 5:
@@ -83,9 +100,8 @@ namespace Plate
             Console.WriteLine("1. Unos radnika\n" +
                               "2. Otpusti radnika\n" +
                               "3. Pregled radnika\n" +
-                              "4. Unos radnog mesta\n" +
+                              "4. Unos/izmena radnog mesta\n" +
                               "5. Lista radnih mesta\n");
-            Console.WriteLine("karakter - Izlaz iz programa");
             Console.WriteLine("Izbor: ");
         }
     }
