@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,10 +10,24 @@ namespace Plate
     class UI
     {
         //TODO ovo ide u firmu!!!
-        
-        
         static void Main(string[] args)
         {
+            /*
+             * Rad sa falovima
+             * File.WriteAllText("test.txt", "Bla bla");
+            File.AppendAllText("test.txt", "Dodatno");
+            
+
+            String[] niz = { "jen", "dva", "tri" };
+            File.WriteAllLines("niz.txt", niz);
+            string a = File.ReadAllText("niz.txt");
+            string[] b = File.ReadAllLines("niz.txt");
+            Console.WriteLine(a);
+            foreach (string s in File.ReadLines("niz.txt"))
+                Console.WriteLine(s);
+            Console.ReadKey(); */
+            
+
             do
             {
                 Meni();
@@ -49,14 +64,14 @@ namespace Plate
                         Console.WriteLine("Unesite id");
                         if (long.TryParse(Console.ReadLine(), out long id))
                         {
-                            if (Firma.radnikPoId(id, out Radnik r))
-                                r.radnoMesto.radnici.Remove(r);
+                            if (Firma.radnikPoId(id, out Radnik ra))
+                                ra.radnoMesto.radnici.Remove(ra);
                         }
                         break;
                     case 3:
                         foreach (Pozicija p in Firma.pozicije)
-                            foreach (Radnik r in p.radnici)
-                                Console.WriteLine(r.ToString());
+                            foreach (Radnik ra in p.radnici)
+                                Console.WriteLine(ra.ToString());
                         break;
                     case 4: //TODO greskaaaa
                         Console.WriteLine("Naziv radnog mesta i plata: ");
@@ -83,14 +98,14 @@ namespace Plate
                         Console.WriteLine("Unesite id radnika: ");
                         if (!long.TryParse(Console.ReadLine(), out long idR))
                             break;
-                        if (Firma.radnikPoId(idR, out Radnik r))
-                            Firma.balans -= r.radnoMesto.plata;
+                       // if (Firma.radnikPoId(idR, out Radnik r))
+                            //Firma.balans -= r.radnoMesto.plata;
 
                         break;
                     case 7:
                         Console.WriteLine("Unesite iznos: ");
-                        if (decimal.TryParse(Console.ReadLine(), out decimal novac))
-                            Firma.balans += Math.Abs(novac);
+                        //if (decimal.TryParse(Console.ReadLine(), out decimal novac))
+                            //Firma.balans += Math.Abs(novac);
                         break;
                     case 8:
                         Console.WriteLine($"Balans: {Firma.balans}");

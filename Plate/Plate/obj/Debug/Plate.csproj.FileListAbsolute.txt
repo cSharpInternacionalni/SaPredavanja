@@ -5,3 +5,10 @@ C:\Users\Mithad\source\repos\Plate\Plate\obj\Debug\Plate.csprojAssemblyReference
 C:\Users\Mithad\source\repos\Plate\Plate\obj\Debug\Plate.csproj.CoreCompileInputs.cache
 C:\Users\Mithad\source\repos\Plate\Plate\obj\Debug\Plate.exe
 C:\Users\Mithad\source\repos\Plate\Plate\obj\Debug\Plate.pdb
+C:\linqpad\SaPredavanja\Plate\Plate\obj\Debug\Plate.csprojAssemblyReference.cache
+C:\linqpad\SaPredavanja\Plate\Plate\obj\Debug\Plate.csproj.CoreCompileInputs.cache
+C:\linqpad\SaPredavanja\Plate\Plate\obj\Debug\Plate.exe
+C:\linqpad\SaPredavanja\Plate\Plate\obj\Debug\Plate.pdb
+C:\linqpad\SaPredavanja\Plate\Plate\bin\Debug\Plate.exe.config
+C:\linqpad\SaPredavanja\Plate\Plate\bin\Debug\Plate.exe
+C:\linqpad\SaPredavanja\Plate\Plate\bin\Debug\Plate.pdb
