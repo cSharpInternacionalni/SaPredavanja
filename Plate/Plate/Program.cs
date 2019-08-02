@@ -9,7 +9,7 @@ namespace Plate
     class UI
     {
         //TODO ovo ide u firmu!!!
-        static HashSet<Pozicija> pozicije = new HashSet<Pozicija>();
+        
         
         static void Main(string[] args)
         {
@@ -27,12 +27,12 @@ namespace Plate
                 switch(izbor)
                 {
                     case 1:
-                        if (UI.pozicije.Count == 0)
+                        if (Firma.pozicije.Count == 0)
                             break;
                         Console.WriteLine("Unesite radno mesto, ime i prezime: ");
                         string[] pozicijaImeIprezime = Console.ReadLine().Split(' ');
                         
-                        foreach (Pozicija p in UI.pozicije)
+                        foreach (Pozicija p in Firma.pozicije)
                         {
                             if (p.naziv.Equals(pozicijaImeIprezime[0]))
                             {
@@ -49,23 +49,12 @@ namespace Plate
                         Console.WriteLine("Unesite id");
                         if (long.TryParse(Console.ReadLine(), out long id))
                         {
-                            foreach (Pozicija p in UI.pozicije)
-                            {
-                                bool otpusten = false;  
-                                foreach (Radnik r in p.radnici)
-                                    if (r.ID == id)
-                                    {
-                                        p.radnici.Remove(r);
-                                        otpusten = true;
-                                        break;
-                                    }
-                                if (otpusten)
-                                    break;
-                            }
+                            if (Firma.radnikPoId(id, out Radnik r))
+                                r.radnoMesto.radnici.Remove(r);
                         }
                         break;
                     case 3:
-                        foreach (Pozicija p in UI.pozicije)
+                        foreach (Pozicija p in Firma.pozicije)
                             foreach (Radnik r in p.radnici)
                                 Console.WriteLine(r.ToString());
                         break;
@@ -75,7 +64,7 @@ namespace Plate
                         if (decimal.TryParse(unos[1], out decimal plata))
                         {
                             bool duplikat = false;
-                            foreach (Pozicija p in UI.pozicije)
+                            foreach (Pozicija p in Firma.pozicije)
                                 if (p.naziv.Equals(unos[0]))
                                 {
                                     duplikat = true;
@@ -83,12 +72,28 @@ namespace Plate
                                     break;
                                 }
                             if (!duplikat)
-                                UI.pozicije.Add(new Pozicija(unos[0], plata));
+                                Firma.pozicije.Add(new Pozicija(unos[0], plata));
                         }
                         break;
                     case 5:
-                        foreach (Pozicija p in UI.pozicije)
+                        foreach (Pozicija p in Firma.pozicije)
                             Console.WriteLine(p.ToString());
+                        break;
+                    case 6: 
+                        Console.WriteLine("Unesite id radnika: ");
+                        if (!long.TryParse(Console.ReadLine(), out long idR))
+                            break;
+                        if (Firma.radnikPoId(idR, out Radnik r))
+                            Firma.balans -= r.radnoMesto.plata;
+
+                        break;
+                    case 7:
+                        Console.WriteLine("Unesite iznos: ");
+                        if (decimal.TryParse(Console.ReadLine(), out decimal novac))
+                            Firma.balans += Math.Abs(novac);
+                        break;
+                    case 8:
+                        Console.WriteLine($"Balans: {Firma.balans}");
                         break;
                 }
 
@@ -101,7 +106,10 @@ namespace Plate
                               "2. Otpusti radnika\n" +
                               "3. Pregled radnika\n" +
                               "4. Unos/izmena radnog mesta\n" +
-                              "5. Lista radnih mesta\n");
+                              "5. Lista radnih mesta\n" +
+                              "6. Isplata\n" +
+                              "7. Uplata\n" +
+                              "8. Stanje\n");
             Console.WriteLine("Izbor: ");
         }
     }

@@ -15,14 +15,12 @@ namespace Plate
         {
             get => $"{this.Prezime} {this.Ime}";
         }
-
+        //TODO ovo ne koristimo jos!
         internal uint neplaceniDani;
 
         //Celobrojno izrazen procenat, +- na platu
         internal int modifikator;
 
-        //EXP objasni properties i pozadinska polja
-        //EXP objasni tagove, kada smo kod toga :D
         internal long ID { private set; get; }
 
         static long iduciID;
