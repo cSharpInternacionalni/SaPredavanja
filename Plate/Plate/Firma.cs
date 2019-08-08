@@ -8,6 +8,34 @@ namespace Plate
 {
     class Firma
     {
+        public class PlateEventArgs : EventArgs
+        {
+            public readonly decimal plata;
+
+            public PlateEventArgs(decimal p)
+            {
+                this.plata = p;
+            }
+        }
+
+        public delegate void PlateEventHandler(object sender, PlateEventArgs e);
+        public static event PlateEventHandler IsplataPlata;
+
+        protected static void onIsplataPlata(object o, PlateEventArgs e) =>
+            Firma.IsplataPlata?.Invoke(o, e);
+
+        public void isplati(object o, decimal iznos)
+        {
+            switch(o)
+            {
+                // isto kao kada napisemo if (o is Pozicija p)
+                case Pozicija _:
+                case Radnik _: 
+                    onIsplataPlata(o, new PlateEventArgs(iznos));
+                    break;
+            }
+        }
+
         static string naziv, JIB, PIB;
         internal static decimal balans { get; private set; }
 

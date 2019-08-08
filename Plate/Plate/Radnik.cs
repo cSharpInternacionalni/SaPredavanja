@@ -34,6 +34,13 @@ namespace Plate
             this.radnoMesto.radnici.Add(this);
         }
 
+        public void OnIsplata(object p, Firma.PlateEventArgs e)
+        {
+            if ((p is Pozicija poz && this.radnoMesto.Equals(poz)) ||
+                (p is Radnik r && r.Equals(this)))
+                Console.WriteLine($"dobio isplatu {e.plata}!");
+        }
+
         /*Lambda izraz, ovo je isto kao i
          * public override string ToString()
          * {
@@ -52,6 +59,7 @@ namespace Plate
             this.naziv = n;
             this.plata = p;
         }
+
 
         public override string ToString() => $"{this.naziv} -- Plata: {this.plata} -- Broj zaposlenih na radnom mestu: {this.radnici.Count}";
     }
