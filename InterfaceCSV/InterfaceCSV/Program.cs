@@ -21,34 +21,72 @@ namespace InterfaceCSV
 
         static void Main(string[] args)
         {
-            Artikal prvi = new Artikal(50, 10, "001", "neki artikal");
+            /*Artikal prvi = new Artikal(50, 10, "001", "neki artikal");
             Artikal drugi = new Artikal(100, 3, "xyz", "drugi artikal");
             Artikal tri = new Artikal(90, 5, "007", "treci artikal");
 
-            dodajUrecnik(prvi, 4);
+            prvi.upisiUfajl("artikli.csv");
+            drugi.upisiUfajl("artikli.csv");
+            tri.upisiUfajl("artikli.csv");*/
+
+            Artikal.ucitajIzFajla("artikli.csv");
+
+            foreach (Artikal a in Artikal.sviArtikli)
+                Console.WriteLine(a.naziv);
+
+            /*dodajUrecnik(prvi, 4);
             dodajUrecnik(drugi, 2);
             dodajUrecnik(prvi, 2);
             dodajUrecnik(tri, 3);
 
             Racun rac = new Racun(recnik);
 
-            Console.WriteLine(rac.ToString());
-            
+            Console.WriteLine(rac.ToString()); */
+
             Console.ReadKey();
         }
     }
 
-    public interface FileIO
+    public interface IFileIO
     {
-        void upisiUfajl(File f);
-        void ucitajIzFajla(File f);
-        string formatZaFajl { set; get; }
+        void upisiUfajl(string f);
+        
+        string formatZaFajl { get; }
     }
 
-    class Artikal : FileIO
+    class Artikal : IFileIO
     {
         internal int cena, stanje;
         internal string sifra, naziv;
+        internal static List<Artikal> sviArtikli = new List<Artikal>();
+        public string formatZaFajl
+        {
+            get => $"{this.sifra};{this.naziv};{this.stanje};{this.cena}{Environment.NewLine}";
+        }
+
+        public void upisiUfajl(string fajl)
+        {
+            File.AppendAllText(fajl, this.formatZaFajl);
+        }
+    
+        public static void ucitajIzFajla(string fajl)
+        {
+            Artikal.sviArtikli.Clear();
+
+            foreach(String art in File.ReadAllLines(fajl))
+            {
+                string[] artParametri = art.Split(';');
+                string sifra = artParametri[0];
+                string naziv = artParametri[1];
+                int kolicina = int.Parse(artParametri[2]);
+                int cena = int.Parse(artParametri[3]);
+
+                Artikal.sviArtikli.Add(new Artikal(kolicina, cena, sifra, naziv));
+            }
+        }
+
+        public Artikal()
+        { }
 
         public Artikal(int c, int s, string sifra, string n)
         {

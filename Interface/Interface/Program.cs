@@ -12,9 +12,19 @@ namespace Interface
         {
             A nekiObjekat = new A();
 
-            Object o = nekiObjekat as Object;
-            NekaKlasa nk = nekiObjekat as NekaKlasa;
-            Test t = nekiObjekat as Test; //Sve pravilno :)
+            Object o = nekiObjekat as Object; //Po polimorfizmu, znamo da instancu svake klase
+                                              //mozemo smatrati objektom, no to nas sprecava da
+                                              //koristimo sve sto je kod nase klase razlicito od
+                                              //objekta (van override-a naravno :))
+            NekaKlasa nk = nekiObjekat as NekaKlasa; //Takodje mozemo da smatramo instancu neke klase
+                                                     //njenom nadklasom. Opet, gubimo sve specificnosti i,
+                                                     //naravno, mozemo se koristiti samo stvarima koje smo
+                                                     //implementirali u nadklasi (opet, override je specifican :))
+            Test t = nekiObjekat as Test; //Pored svega, mozemo klasu posmatrati kao interfejs koji smo u njoj
+                                          //implementirali. Dokle god je tako posmatramo, mozemo se koristiti
+                                          //samo implementiranim interfejsom. Sve sto impementiramo iz interfejsa,
+                                          //inace, je sealed, pa ako hocemo da mozemo override u podklasama moramo
+                                          //da naznacimo u klasi da je virtual
                 
 
         }
@@ -25,10 +35,11 @@ namespace Interface
         int blabla;
     }
 
-    class A : NekaKlasa, Test, Test2
+    class A : NekaKlasa, Test, Test2 //klasa moze da implementira vise od jednog interfejsa
     {
-        void Test.f(int a)
-        {
+        void Test.f(int a) //Ako imamo dva interfejsa sa istom metodom, 
+        {                  //to resavamo tako sto stavimo ime interfejsa, da bi bilo jasno
+                           //koji tacno implementiramo u ovom trenutku
 
         }
 
