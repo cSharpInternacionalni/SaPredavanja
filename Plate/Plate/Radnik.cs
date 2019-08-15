@@ -32,6 +32,13 @@ namespace Plate
             this.ID = iduciID++;
             this.radnoMesto = poz;
             this.radnoMesto.radnici.Add(this);
+            Firma.IsplataPlata += this.OnIsplata;
+        }
+
+        public void Otkaz()
+        {
+            Firma.IsplataPlata -= this.OnIsplata;
+            this.radnoMesto.radnici.Remove(this);
         }
 
         public void OnIsplata(object p, Firma.PlateEventArgs e)

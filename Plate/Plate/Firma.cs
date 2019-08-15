@@ -24,7 +24,7 @@ namespace Plate
         protected static void onIsplataPlata(object o, PlateEventArgs e) =>
             Firma.IsplataPlata?.Invoke(o, e);
 
-        public void isplati(object o, decimal iznos)
+        public static void isplati(object o, decimal iznos)
         {
             switch(o)
             {

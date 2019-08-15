@@ -30,6 +30,15 @@ namespace Plate
 
             do
             {
+                Firma.pozicije.Add(new Pozicija("proba", 500));
+            
+                new Radnik("Pera", "Peric", Firma.pozicije.Last());
+
+                Firma.isplati(Firma.pozicije.Last(), 300);
+
+                Firma.pozicije.Last().radnici.Clear();
+                Firma.isplati(Firma.pozicije.Last(), 300);
+
                 Meni();
                 //True kod ReadKey samo znaci da nece ispisivati 
                 //sta smo uneli u konzolu
