@@ -41,7 +41,7 @@ namespace UnitTesting
         //da bude :D vise ni objA.Equals(objA), sto bi bilo tacno za object klasu
         //nece da bude istinito, slobodni smo skroz.
         public override bool Equals(object obj)
-        /*{//Imajmo u vidu da Equals, kako ga je object definisao uzima object za argument
+        {//Imajmo u vidu da Equals, kako ga je object definisao uzima object za argument
             //pa smo prvo duzni da se uverimo da je objekat koji smo dobili za poredjenje
             //klase sa kojom zelimo da ga poredimo. A posto nam is daje objekat koji
             //odmah mozemo da konzumiramo a samo jednu proveru imamo to smo povezali sa && ovde.
@@ -56,7 +56,7 @@ namespace UnitTesting
                 return true;
             return false;
             //CHALLENGE ovo moze da stane u jedan fin red, sve sa => :) moze li ko? 
-        }*/
+        }
 
         //Zgodno je imati fin override na ToString jer ce se on cesto pozvati nad objektom
         //kada komplajer ili neko tamo :D, pokusava da nam saopsti nesto o istom, pa ako
