@@ -8,8 +8,8 @@
         Title="MainWindow" Height="450" Width="800">
     <DockPanel>
         <StackPanel Height="50" DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Margin="5" Width="50" Content="Add"/>
-            <Button Margin="5" Width="50" Content="Remove"/>
+            <Button Margin="5" Width="50" Content="Add" Click="Button_Click"/>
+            <Button Margin="5" Width="50" Content="Remove" Click="Button_Click_1"/>
             <Button Margin="5" Width="50" Content="Change"/>
         </StackPanel>
         <ListBox ItemsSource="{Binding listaImena}" Name="lstBox"></ListBox>

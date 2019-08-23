@@ -9,15 +9,16 @@ namespace Binding
 {
     class Imena
     {
-        public List<string> listaImena
+        public ObservableCollection<string> listaImena
         {get; set;}
 
         string naziv;
 
         public Imena()
         {
-            this.listaImena = new List<string>();
+            this.listaImena = new ObservableCollection<string>();
         }
+
         public string Naziv
         {
             get => 
