@@ -24,6 +24,7 @@ namespace Commanding2
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = new ListaStringova();
         }
     }
 
@@ -31,6 +32,6 @@ namespace Commanding2
     {
         ObservableCollection<string> lista;
         string unos;
-        public string Unos {set; get;}
+        public string Unos {set => this.unos = value; get => this.unos;}
     }
 }
