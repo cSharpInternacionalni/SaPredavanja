@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,12 +27,43 @@ namespace Commanding2
             InitializeComponent();
             this.DataContext = new ListaStringova();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var lista = this.DataContext as ListaStringova;
+            lista.Lista.Add(lista.Unos);
+
+        }
     }
 
-    public class ListaStringova
+    public class ListaStringova : INotifyPropertyChanged
     {
-        ObservableCollection<string> lista;
+        ObservableCollection<string> lista = new ObservableCollection<string>();
+        public ObservableCollection<string> Lista
+        {
+            get => this.lista;
+            set => this.lista = value;
+        } 
+
         string unos;
-        public string Unos {set => this.unos = value; get => this.unos;}
+        public string Unos
+        {
+            set
+            {
+                //REFACTOR: Treba da se osiguramo da
+                //ne trigerujemo event ako nam je
+                //nova vrednost ista kao stara
+                this.unos = value;
+                this.Izmena();
+            }
+            get => this.unos;
+        }
+
+        public void Izmena()
+        {
+            this.PropertyChanged(this, new PropertyChangedEventArgs("Unos"));
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }
