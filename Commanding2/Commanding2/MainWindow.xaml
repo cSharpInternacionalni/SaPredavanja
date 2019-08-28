@@ -7,13 +7,14 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <DockPanel>
-        <TextBox Name="bla" DockPanel.Dock="Top" Text="{Binding Unos}" Margin="14,0,-14,0"></TextBox>
+        <TextBox Name="bla" DockPanel.Dock="Top" Text="{Binding Unos, UpdateSourceTrigger=PropertyChanged}" Margin="14,0,-14,0"></TextBox>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" DockPanel.Dock="Bottom">
             <Button Content="Add" Command="{Binding DodajKomanda}"
                     CommandParameter="{Binding .}"/>
-            <Button Content="Remove"/>
+            <Button Content="Remove" Command="{Binding UkloniKomanda}"
+                    CommandParameter="{Binding .}"/>
         </StackPanel>
-        <ListBox ItemsSource="{Binding Lista}"></ListBox>
+        <ListBox ItemsSource="{Binding Lista}" SelectedItem="{Binding Selektovano}" ></ListBox>
     </DockPanel>
         
     

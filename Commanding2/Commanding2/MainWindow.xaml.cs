@@ -31,6 +31,28 @@ namespace Commanding2
         }        
     }
 
+    public class UkloniString : ICommand
+    {
+        public event EventHandler CanExecuteChanged
+        {
+            add => CommandManager.RequerySuggested += value;
+            remove => CommandManager.RequerySuggested -= value;
+        }
+
+        public bool CanExecute(object parameter)
+        {
+            var lst = parameter as ListaStringova;
+            if ((lst != null) && !string.IsNullOrEmpty(lst.Selektovano))
+                return true;
+            return false;
+        }
+
+        public void Execute(object parameter)
+        {
+            
+        }
+    }
+
     public class DodajString : ICommand
     {
         public event EventHandler CanExecuteChanged
@@ -41,9 +63,8 @@ namespace Commanding2
 
         public bool CanExecute(object parameter)
         {
-            Debug.WriteLine("Test");
             var lista = parameter as ListaStringova;
-            if ((lista != null) && !string.IsNullOrEmpty(lista.Unos))
+            if ((lista != null) && !string.IsNullOrEmpty(lista.Unos) && !lista.Lista.Contains(lista.Unos))
                 return true;
             return false;
         }
@@ -52,6 +73,7 @@ namespace Commanding2
         {
             var lista = parameter as ListaStringova;
             lista.Lista.Add(lista.Unos);
+            lista.Unos = "";
         }
     }
 
@@ -63,6 +85,12 @@ namespace Commanding2
             get;// => this.dodajKomanda;
             set;// => this.dodajKomanda = value;
         } = new DodajString();
+
+        public UkloniString UkloniKomanda
+        {
+            get;
+            set;
+        } = new UkloniString();
 
         //ObservableCollection<string> lista = new ObservableCollection<string>();
         public ObservableCollection<string> Lista
@@ -80,14 +108,26 @@ namespace Commanding2
                 //ne trigerujemo event ako nam je
                 //nova vrednost ista kao stara
                 this.unos = value;
-                this.Izmena();
+                this.Izmena("Unos");
             }
             get => this.unos;
         }
 
-        public void Izmena()
+        string selektovano;
+        public string Selektovano
         {
-            this.PropertyChanged(this, new PropertyChangedEventArgs("Unos"));
+            set
+            {
+                this.selektovano = value;
+                this.Izmena("Selektovano");
+            }
+
+            get => this.selektovano;
+        }
+
+        public void Izmena(string prop)
+        {
+            this.PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
