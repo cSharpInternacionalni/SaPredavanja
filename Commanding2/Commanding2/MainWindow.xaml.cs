@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,24 +27,49 @@ namespace Commanding2
         {
             InitializeComponent();
             this.DataContext = new ListaStringova();
+            
+        }        
+    }
+
+    public class DodajString : ICommand
+    {
+        public event EventHandler CanExecuteChanged
+        {
+            add => CommandManager.RequerySuggested += value;
+            remove => CommandManager.RequerySuggested -= value;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        public bool CanExecute(object parameter)
         {
-            var lista = this.DataContext as ListaStringova;
-            lista.Lista.Add(lista.Unos);
+            Debug.WriteLine("Test");
+            var lista = parameter as ListaStringova;
+            if ((lista != null) && !string.IsNullOrEmpty(lista.Unos))
+                return true;
+            return false;
+        }
 
+        public void Execute(object parameter)
+        {
+            var lista = parameter as ListaStringova;
+            lista.Lista.Add(lista.Unos);
         }
     }
 
     public class ListaStringova : INotifyPropertyChanged
     {
-        ObservableCollection<string> lista = new ObservableCollection<string>();
+        //public DodajString dodajKomanda = new DodajString();
+        public DodajString DodajKomanda
+        {
+            get;// => this.dodajKomanda;
+            set;// => this.dodajKomanda = value;
+        } = new DodajString();
+
+        //ObservableCollection<string> lista = new ObservableCollection<string>();
         public ObservableCollection<string> Lista
         {
-            get => this.lista;
-            set => this.lista = value;
-        } 
+            get; //=> this.lista;
+            set; //=> this.lista = value;
+        } = new ObservableCollection<string>();
 
         string unos;
         public string Unos

@@ -7,9 +7,10 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <DockPanel>
-        <TextBox DockPanel.Dock="Top" Text="{Binding Unos}" Margin="14,0,-14,0"></TextBox>
+        <TextBox Name="bla" DockPanel.Dock="Top" Text="{Binding Unos}" Margin="14,0,-14,0"></TextBox>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" DockPanel.Dock="Bottom">
-            <Button Content="Add" Click="Button_Click"/>
+            <Button Content="Add" Command="{Binding DodajKomanda}"
+                    CommandParameter="{Binding .}"/>
             <Button Content="Remove"/>
         </StackPanel>
         <ListBox ItemsSource="{Binding Lista}"></ListBox>
