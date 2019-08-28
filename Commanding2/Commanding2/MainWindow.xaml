@@ -13,8 +13,10 @@
                     CommandParameter="{Binding .}"/>
             <Button Content="Remove" Command="{Binding UkloniKomanda}"
                     CommandParameter="{Binding .}"/>
+            <Button Content="Change" Command="{Binding IzmeniKomanda}"
+                    CommandParameter="{Binding .}"/>
         </StackPanel>
-        <ListBox ItemsSource="{Binding Lista}" SelectedItem="{Binding Selektovano}" ></ListBox>
+        <ListBox ItemsSource="{Binding Lista}" SelectedIndex="{Binding Selektovano}" ></ListBox>
     </DockPanel>
         
     

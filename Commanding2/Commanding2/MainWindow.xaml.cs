@@ -26,9 +26,32 @@ namespace Commanding2
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new ListaStringova();
-            
+            this.DataContext = new ListaStringova();   
         }        
+    }
+
+    public class IzmeniString : ICommand
+    {
+        public event EventHandler CanExecuteChanged
+        {
+            add => CommandManager.RequerySuggested += value;
+            remove => CommandManager.RequerySuggested -= value;
+        }
+
+        public bool CanExecute(object parameter)
+        {
+            var lst = parameter as ListaStringova;
+            if ((lst != null) && lst.Selektovano >= 0 && !string.IsNullOrEmpty(lst.Unos)
+                                && !string.IsNullOrWhiteSpace(lst.Unos) && !lst.Lista.Contains(lst.Unos))
+                return true;
+            return false;
+        }
+
+        public void Execute(object parameter)
+        {
+            var lst = parameter as ListaStringova;
+            lst.Lista[lst.Selektovano] = lst.Unos;
+        }
     }
 
     public class UkloniString : ICommand
@@ -42,13 +65,22 @@ namespace Commanding2
         public bool CanExecute(object parameter)
         {
             var lst = parameter as ListaStringova;
-            if ((lst != null) && !string.IsNullOrEmpty(lst.Selektovano))
+            if ((lst != null) && lst.Selektovano >= 0)
                 return true;
             return false;
         }
 
         public void Execute(object parameter)
         {
+            var lst = parameter as ListaStringova;
+            int stariIndeks = lst.Selektovano;
+            lst.Lista.RemoveAt(lst.Selektovano);
+            if (lst.Lista.Count < 1)
+                lst.Unos = "";
+            else if (stariIndeks < lst.Lista.Count)
+                lst.Selektovano = stariIndeks;
+            else
+                lst.Selektovano = --stariIndeks;
             
         }
     }
@@ -64,7 +96,8 @@ namespace Commanding2
         public bool CanExecute(object parameter)
         {
             var lista = parameter as ListaStringova;
-            if ((lista != null) && !string.IsNullOrEmpty(lista.Unos) && !lista.Lista.Contains(lista.Unos))
+            if ((lista != null) && !string.IsNullOrEmpty(lista.Unos)
+                                && !string.IsNullOrWhiteSpace(lista.Unos) && !lista.Lista.Contains(lista.Unos))
                 return true;
             return false;
         }
@@ -72,7 +105,7 @@ namespace Commanding2
         public void Execute(object parameter)
         {
             var lista = parameter as ListaStringova;
-            lista.Lista.Add(lista.Unos);
+            lista.Lista.Add(lista.Unos.Trim());
             lista.Unos = "";
         }
     }
@@ -92,11 +125,17 @@ namespace Commanding2
             set;
         } = new UkloniString();
 
+        public IzmeniString IzmeniKomanda
+        {
+            get;
+            set;
+        } = new IzmeniString();
+
         //ObservableCollection<string> lista = new ObservableCollection<string>();
         public ObservableCollection<string> Lista
         {
             get; //=> this.lista;
-            set; //=> this.lista = value;
+            set; //=> this.lista;
         } = new ObservableCollection<string>();
 
         string unos;
@@ -113,12 +152,14 @@ namespace Commanding2
             get => this.unos;
         }
 
-        string selektovano;
-        public string Selektovano
+        int selektovano = -1;
+        public int Selektovano
         {
             set
             {
                 this.selektovano = value;
+                if (value >= 0)
+                    this.Unos = this.Lista[value];
                 this.Izmena("Selektovano");
             }
 
