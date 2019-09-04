@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
+using System.Xml.Serialization;
 
 namespace XmlObjekti
 {
@@ -36,20 +37,35 @@ namespace XmlObjekti
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            using (StreamWriter sw
+            XmlSerializer xml = 
+                new XmlSerializer(typeof(ObservableCollection<Osoba>));
+            using (FileStream fs = 
+                new FileStream("textXML.txt", FileMode.OpenOrCreate))
+            {
+                xml.Serialize(fs, this.lista);
+            }
+            /*using (StreamWriter sw
                         = new StreamWriter
                              (File.OpenWrite("test.txt")))
                 foreach (Osoba o in this.lista)
-                    sw.WriteLine($"{o.Id};{o.Ime};{o.Prezime}");
+                    sw.WriteLine($"{o.Id};{o.Ime};{o.Prezime}");*/
             
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             
-            if (File.Exists("test.txt"))
+            if (File.Exists("testXML.txt"))
             {
-                using (StreamReader sr =
+                using (FileStream fs =
+                        new FileStream("testXML.txt", FileMode.Open))
+                {
+                    XmlSerializer xml = new XmlSerializer(typeof(ObservableCollection<Osoba>));
+
+                    this.lista = (ObservableCollection<Osoba>)
+                                             xml.Deserialize(fs);
+                }
+                /*using (StreamReader sr =
                             new StreamReader(File.OpenRead("test.txt")))
                 {
                     while (!sr.EndOfStream)
@@ -61,17 +77,18 @@ namespace XmlObjekti
                                                   obj[2]));
                     }
 
-                }
+                }*/
             }
         }
     }
 
-    class Osoba
+    public class Osoba
     {
         public int Id { get; set; }
         public string Ime { get; set; }
         public string Prezime { get; set; }
 
+        public Osoba() { }
         public Osoba(int i, string ime, string pre)
         {
             this.Id = i;
