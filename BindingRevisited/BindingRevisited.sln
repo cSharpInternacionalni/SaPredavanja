@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29306.81
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BindingRevisited", "BindingRevisited\BindingRevisited.csproj", "{6EDA3D0C-761A-466F-A7EA-15A2DB45E90F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6EDA3D0C-761A-466F-A7EA-15A2DB45E90F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EDA3D0C-761A-466F-A7EA-15A2DB45E90F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EDA3D0C-761A-466F-A7EA-15A2DB45E90F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EDA3D0C-761A-466F-A7EA-15A2DB45E90F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7C6945A3-2F97-400D-AE16-DA8319AE8107}
+	EndGlobalSection
+EndGlobal
