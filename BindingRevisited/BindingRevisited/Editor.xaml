@@ -13,8 +13,16 @@
         </Grid.ColumnDefinitions>
         <TextBox Name="txtIme" HorizontalAlignment="Left" Height="23" Margin="33.19,111,0,0" TextWrapping="Wrap" Text="{Binding Ime, Mode=TwoWay, UpdateSourceTrigger=Explicit}" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
         <TextBox Name="txtPrezime" HorizontalAlignment="Left" Height="23" Margin="33.19,175,0,0" TextWrapping="Wrap" Text="{Binding Prezime, Mode=TwoWay,UpdateSourceTrigger=Explicit}" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="78,281,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" Click="Button_Click"/>
-        <DataGrid HorizontalAlignment="Left" Height="158" Margin="10,40,0,0" VerticalAlignment="Top" Width="260"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="78,253,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" Click="Button_Click"/>
+        <TextBox Name="txtGodine" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="33,230,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120">
+            <TextBox.Text>
+                <Binding Path="Godine" Mode="TwoWay" UpdateSourceTrigger="Explicit">
+                    <Binding.ValidationRules>
+                        <local:Godine/>
+                    </Binding.ValidationRules>
+                </Binding> 
+            </TextBox.Text>   
+        </TextBox>
 
     </Grid>
 </Window>

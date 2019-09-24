@@ -6,8 +6,23 @@
         xmlns:local="clr-namespace:BindingRevisited"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <local:BooleanToColor x:Key="BtC"/>
+    </Window.Resources>
     <Grid>
         <Button Content="Button" HorizontalAlignment="Left" Margin="197,49,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
-        <DataGrid Name="dg"  HorizontalAlignment="Left" Height="163" Margin="10,131,0,0" VerticalAlignment="Top" Width="772" ColumnWidth="*"/>
+        <DataGrid Name="dg"  HorizontalAlignment="Left" Height="163" Margin="10,131,0,0" VerticalAlignment="Top" Width="772" ColumnWidth="*" IsReadOnly="True" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Ime}" ClipboardContentBinding="{x:Null}" Header="Ime"/>
+                <DataGridTextColumn Binding="{Binding Prezime}" ClipboardContentBinding="{x:Null}" Header="Prezime"/>
+                <DataGridTemplateColumn CanUserSort="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Background="{Binding Platio, Converter={StaticResource BtC}}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

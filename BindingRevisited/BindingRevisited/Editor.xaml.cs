@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,7 +35,23 @@ namespace BindingRevisited
         {
             txtIme.GetBindingExpression(TextBox.TextProperty).UpdateSource();
             txtPrezime.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            BindingExpression b = txtGodine.GetBindingExpression(TextBox.TextProperty);
+            b.ValidateWithoutUpdate();
+            if (b.HasValidationError)
+                txtGodine.Text = b.ValidationError.ErrorContent.ToString();
+            else
+                b.UpdateSource();
             this.Close();
+        }
+    }
+
+    public class Godine : ValidationRule
+    {
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        {
+            if (int.TryParse((string)value, out int i) && i < 120)
+                return new ValidationResult(true, null);
+            return new ValidationResult(false, "Vrednost nije validna");
         }
     }
 }
