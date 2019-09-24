@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -21,36 +22,27 @@ namespace BindingRevisited
     /// </summary>
     public partial class MainWindow : Window
     {
-        Osoba nn = new Osoba("Pera", "Peric");
+        ObservableCollection<Osoba> nn = new ObservableCollection<Osoba>();
         public MainWindow()
         {
-           
+            nn.Add(new Osoba("Pera", "Peric", "pperic@nesto.com"));
+            nn.Add(new Osoba("Neko", "Nekic", "neko@negde.nesto"));
             InitializeComponent();
+            dg.ItemsSource = nn;
             this.DataContext = nn;
-            Binding b = new Binding();
-            b.Source = nn;          
-            b.Path = new PropertyPath("Ime");
-            b.Mode = BindingMode.TwoWay;
-            b.UpdateSourceTrigger = UpdateSourceTrigger.Explicit;
-            BindingOperations.SetBinding(txtBox, TextBox.TextProperty, b);
-
-        }
+                  }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            nn.Ime = "Nesto";
-            System.Diagnostics.Debug.WriteLine($"Vrednost je: {this.nn.Ime}");
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            txtBox.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            Editor noviProzor = new Editor();
+            noviProzor.Visibility = Visibility.Visible;
         }
     }
 
     public class Osoba : INotifyPropertyChanged
     {
-        string ime;
+        public string ImeIPrezime { get => $"{this.ime} {this.prezime}"; }
+        public string ime;
         public string Ime
         {
             get => this.ime;
@@ -58,6 +50,7 @@ namespace BindingRevisited
             {
                 this.ime = value;
                 this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Ime"));
+                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ImeIPrezime"));
             }
         }
 
@@ -69,14 +62,42 @@ namespace BindingRevisited
             {
                 this.prezime = value;
                 this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Prezime"));
+                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ImeIPrezime"));
             }
         }
-        public Osoba(string i, string p)
+
+        string mail;
+        public string Mail
+        {
+            get => mail;
+            set
+            {
+                this.mail = value;
+                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Mail"));
+            }
+        }
+
+        Boolean platio;
+        public Boolean Platio
+        {
+            get => platio;
+            set
+            {
+                this.platio = value;
+                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Platio"));
+            }
+        }
+        public Osoba(string i, string p, string m)
         {
             this.Ime = i;
             this.Prezime = p;
+            this.Mail = m;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+        public override string ToString()
+        {
+            return $"{this.Ime} {this.Prezime}";
+        }
     }
 }
