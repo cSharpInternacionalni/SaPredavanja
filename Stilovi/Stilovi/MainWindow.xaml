@@ -12,8 +12,12 @@
 
         </Style>
         <Style TargetType="Button">
-            <Setter Property="Background" Value="AliceBlue"/>
-
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Test}" Value="abc">
+                    <Setter Property="Background" Value="Blue"/>        
+                </DataTrigger>
+            </Style.Triggers>
+            
         </Style>
         <Style TargetType="TextBox">
             <Style.Triggers>
@@ -40,6 +44,7 @@
         </Style>
     </Window.Resources>
     <DockPanel>
+        <CheckBox Name="cb" Content="Test" DockPanel.Dock="Top"/>
         <Button DockPanel.Dock="Top"  Content="Nesto" Style="{StaticResource ZelenoDugme}"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Width="75"/>
         <Button DockPanel.Dock="Top" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" />
         <Button DockPanel.Dock="Top" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" >

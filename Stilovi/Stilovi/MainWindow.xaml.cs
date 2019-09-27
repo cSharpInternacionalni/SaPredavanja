@@ -30,5 +30,5 @@ namespace Stilovi
         
         public string Test { get; set; } = "abc";
 
-        }
+    }
 }
